@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity;
+
+/**
+ * Interface ArrayableInterface
+ * @package App\Entity
+ */
+interface ArrayableInterface
+{
+    /**
+     * @return array
+     */
+    public function toArray(): array;
+}

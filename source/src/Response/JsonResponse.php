@@ -31,4 +31,12 @@ final class JsonResponse implements ResponseInterface
     {
         return \json_encode($this->data);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function headers(): array
+    {
+        return [];
+    }
 }

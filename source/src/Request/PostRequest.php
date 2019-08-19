@@ -8,7 +8,7 @@ namespace App\Request;
  * Class Request
  * @package App\Request
  */
-class GetRequest implements RequestInterface
+class PostRequest implements RequestInterface
 {
     /**
      * @var array
@@ -37,6 +37,6 @@ class GetRequest implements RequestInterface
      */
     public function getRequestType(): string
     {
-        return static::GET;
+        return static::POST;
     }
 }

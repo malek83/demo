@@ -12,7 +12,7 @@ use App\Response\ResponseInterface;
  * Class TestController
  * @package App\Controller
  */
-class HealthController implements ControllerInterface
+class HealthController extends AbstractController implements ControllerInterface
 {
     /**
      * @param RequestInterface $request

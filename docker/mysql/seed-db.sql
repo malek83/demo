@@ -14,10 +14,10 @@ CREATE TABLE `node` (
 
 set names utf8;
 
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Aranżer', RAND(), RAND(), '1', '14', NULL);
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Artena', RAND(), RAND(), '2', '7', 'L');
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Szal', RAND(), RAND(), '3', '4', 'L');
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Arteria', RAND(), RAND(), '5', '6', 'R');
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Hebab', RAND(), RAND(), '8', '13', 'R');
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Navara', RAND(), RAND(), '9', '10', 'L');
-INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Bajgala', RAND(), RAND(), '11', '12', 'R');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Aranżer', RAND()*100, RAND()*100, '1', '14', NULL);
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Artena', RAND()*100, RAND()*100, '2', '7', 'L');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Szal', RAND()*100, RAND()*100, '3', '4', 'L');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Arteria', RAND()*100, RAND()*100, '5', '6', 'R');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Hebab', RAND()*100, RAND()*100, '8', '13', 'R');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Navara', RAND()*100, RAND()*100, '9', '10', 'L');
+INSERT INTO `node` (`id`, `username`, `credits_left`, `credits_right`, `lft`, `rgt`, `direction`) VALUES (NULL, 'Bajgala', RAND()*100, RAND()*100, '11', '12', 'R');

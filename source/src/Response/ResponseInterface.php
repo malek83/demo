@@ -14,4 +14,9 @@ interface ResponseInterface
      * @return string
      */
     public function render(): string;
+
+    /**
+     * @return array
+     */
+    public function headers(): array;
 }

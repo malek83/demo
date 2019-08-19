@@ -11,9 +11,24 @@ namespace App\Request;
 interface RequestInterface
 {
     /**
+     * @type string
+     */
+    public const GET = 'GET';
+
+    /**
+     * @type string
+     */
+    public const POST = 'POST';
+
+    /**
      * @param string $name
      * @param string $default
      * @return mixed
      */
     public function get(string $name, $default = null);
+
+    /**
+     * @return string
+     */
+    public function getRequestType(): string;
 }
