@@ -1,0 +1,15 @@
+{
+  "name": "mmalecki/demo",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Michal Malecki",
+      "email": "michal.andrzej.malecki@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {"App\\": "src/"}
+  }
+}
