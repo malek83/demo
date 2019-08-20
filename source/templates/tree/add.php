@@ -7,6 +7,7 @@
                 <?php echo $this->data['parent']->getUsername(); ?><br/>(credits
                 left: <?php echo $this->data['parent']->getCreditsLeft(); ?>) (credits
                 right: <?php echo $this->data['parent']->getCreditsRight(); ?>)
+                <p><?php if(isset($this->data['errors']['parent'])) {echo $this->data['errors']['parent'];} ?></p>
             </td>
         </tr>
         <tr>

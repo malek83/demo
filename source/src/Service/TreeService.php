@@ -52,7 +52,10 @@ class TreeService
      */
     public function getNode(int $nodeId): ?NodeEntity
     {
-        return $this->nodeRepository->getNode($nodeId);
+        $parent = $this->nodeRepository->getNode($nodeId);
+        $nodes = $this->nodeRepository->getChildren($parent);
+
+        return $this->treeStructureBuilder->build($nodes);
     }
 
     /**
@@ -61,6 +64,30 @@ class TreeService
      */
     public function addNode(NodeEntity $parent, NodeEntity $child)
     {
-        $this->nodeRepository->addNode($child, $parent->getLft(), $parent->getRgt());
+        $leftChild = $parent->getLeftChild();
+        $rightChild = $parent->getRightChild();
+        if($leftChild) {
+            $child->setLft($leftChild->getRgt() + 1);
+            $child->setRgt($leftChild->getRgt() + 2);
+
+            $lft = $child->getLft();
+            $rgt = $child->getLft();
+
+        } elseif($rightChild) {
+            $child->setLft($parent->getLft() + 1);
+            $child->setRgt($parent->getLft() + 2);
+
+            $lft = $child->getLft();
+            $rgt = $child->getRgt();
+        } else {
+
+            $child->setLft($parent->getLft() + 1);
+            $child->setRgt($parent->getLft() + 2);
+            $lft = $child->getLft();
+            $rgt = $parent->getRgt();
+
+        }
+
+        $this->nodeRepository->addNode($child, $lft, $rgt);
     }
 }

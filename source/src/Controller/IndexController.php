@@ -43,7 +43,7 @@ class IndexController extends AbstractController implements ControllerInterface
             throw new \Exception('node doesn\'t exists');
         }
 
-        $form = new NodeForm();
+        $form = new NodeForm($parent);
 
         if ($request->getRequestType() === RequestInterface::POST && ($errors = $form->validate($request)) === true) {
             $node = new NodeEntity();

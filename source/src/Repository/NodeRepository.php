@@ -32,9 +32,22 @@ class NodeRepository extends AbstractRepository
      */
     public function getSortedFromLeft(): ?array
     {
-        return $this->findAll(['lft' => 'asc']);
+        return $this->findAll([], ['lft' => 'asc']);
     }
 
+    public function getChildren(NodeEntity $parent): ?array
+    {
+        $params = [
+            ['lft', '>=', $parent->getLft()],
+            ['lft', '<=', $parent->getRgt()]
+        ];
+        return $this->findAll($params, ['lft' => 'asc']);
+    }
+
+    /**
+     * @param int $nodeId
+     * @return NodeEntity|null
+     */
     public function getNode(int $nodeId): ?NodeEntity
     {
         return $this->findOne(['id' => $nodeId]);
@@ -42,11 +55,8 @@ class NodeRepository extends AbstractRepository
 
     public function addNode(NodeEntity $node, int $lft, int $rgt): void
     {
-        $this->moveLeft($lft + 1, 2);
+        $this->moveLeft($lft, 2);
         $this->moveRight($rgt, 2);
-
-        $node->setLft($lft + 1);
-        $node->setRgt($lft + 2);
 
         $this->persist($node->toArray());
     }

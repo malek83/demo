@@ -19,9 +19,9 @@ abstract class AbstractRepository
      * @param array $orderBy
      * @return mixed
      */
-    public function findAll($orderBy = [])
+    public function findAll($params = [], $orderBy = [])
     {
-        return $this->connection->findAll(static::getTable(), static::getEntity(), $orderBy);
+        return $this->connection->findAll($params, static::getTable(), static::getEntity(), $orderBy);
     }
 
     /**

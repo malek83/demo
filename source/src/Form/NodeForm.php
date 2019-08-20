@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Form;
 
+use App\Entity\NodeEntity;
 use App\Request\RequestInterface;
+use App\Validator\NodeChildrenValidator;
 use App\Validator\NumericValidator;
 use App\Validator\StringValidator;
 
@@ -14,10 +16,20 @@ use App\Validator\StringValidator;
  */
 class NodeForm
 {
+
     /**
-     * @var RequestInterface
+     * @var NodeEntity
      */
-    protected $request;
+    protected $node;
+
+    /**
+     * NodeForm constructor.
+     * @param NodeEntity $node
+     */
+    public function __construct(NodeEntity $node)
+    {
+        $this->node = $node;
+    }
 
     /**
      * @param RequestInterface $request
@@ -42,6 +54,11 @@ class NodeForm
 
         if ($validator->validate($creditsRight) === false) {
             $errors['credits_right'] = 'Value is invalid';
+        }
+
+        $validator = new NodeChildrenValidator($this->node);
+        if ($validator->validate($request->get('direction')) === false) {
+            $errors['parent'] = 'Child already exists';
         }
 
         return count($errors) > 0 ? $errors : true;

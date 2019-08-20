@@ -18,7 +18,7 @@ class TreeStructureBuilder
      */
     public function build(array $nodes): ?NodeEntity
     {
-        if (is_array($nodes) && count($nodes) > 1) {
+        if (is_array($nodes) && count($nodes) >= 1) {
             $root = \array_shift($nodes);
 
             $this->recursiveBuild($root, $nodes);

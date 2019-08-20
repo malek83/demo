@@ -25,34 +25,38 @@ class Connection
     }
 
     /**
+     * @param array $params
      * @param string $tableName
      * @param string $entityName
      * @param array $orderBy
      * @return array
      */
-    public function findAll(string $tableName, string $entityName, array $orderBy = [])
+    public function findAll(array $params, string $tableName, string $entityName, array $orderBy = [])
     {
-        $query = 'select * from ' . $tableName . $this->getOrderStatement($orderBy);
+        $query = 'select * from ' . $tableName;
+
+        list($query, $queryParams) = $this->getWhereStatement($params, $query);
+
+        $query .= $this->getOrderStatement($orderBy);
 
         $statement = $this->pdo->prepare($query);
 
-        $statement->execute();
+        $statement->execute($queryParams);
 
         return $statement->fetchAll(\PDO::FETCH_CLASS, $entityName);
     }
 
+    /**
+     * @param array $params
+     * @param string $tableName
+     * @param string $entityName
+     * @return mixed
+     */
     public function findOne(array $params, string $tableName, string $entityName)
     {
-        $queryParams = [];
         $query = 'select * from ' . $tableName;
 
-        if (count($params) > 0) {
-            $query .= ' WHERE ';
-            foreach ($params as $key => $value) {
-                $query .= ' ' . $key . ' = :' . $key;
-                $queryParams[':' . $key] = $value;
-            }
-        }
+        list($query, $queryParams) = $this->getWhereStatement($params, $query);
 
         $statement = $this->pdo->prepare($query);
 
@@ -109,5 +113,29 @@ class Connection
         $query = substr($query, 0, strlen($query) - 2) . ');';
 
         return $this->executeQuery($query, $params);
+    }
+
+    /**
+     * @param array $params
+     * @param string $query
+     * @return array
+     */
+    public function getWhereStatement(array $params, string $query): array
+    {
+        $queryParams = [];
+        if (count($params) > 0) {
+            $query .= ' WHERE 1=1';
+            foreach ($params as $key => $value) {
+                if (is_array($value)) {
+                    $query .= ' and ' . $value[0] . ' ' . $value[1] . ' :' . $value[0] . $key;
+                    $queryParams[':' . $value[0] . $key] = $value[2];
+
+                } else {
+                    $query .= ' and ' . $key . ' = :' . $key;
+                    $queryParams[':' . $key] = $value;
+                }
+            }
+        }
+        return array($query, $queryParams);
     }
 }
